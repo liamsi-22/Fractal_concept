@@ -6,13 +6,15 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:08:22 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/28 18:17:01 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:12:05 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HEADER_H
 #define HEADER_H
 
+#include <X11/keysym.h> // Include the header for keysyms
+#include <X11/X.h>     // Include X11 header for event constants like KeyPress
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -47,8 +49,6 @@
 #define LAVA_RED        0xFF3300  // A bright, molten red
 
 
-
-
 // define structs
 
 typedef struct s_complex
@@ -56,7 +56,6 @@ typedef struct s_complex
     double  x;
     double  y;
 }       t_complex;
-
 
 typedef struct  s_img
 {
@@ -85,8 +84,10 @@ typedef struct  s_fractal
     //hooks member variables
     double  escape_value;
     
-	double	julia_x;
-	double	julia_y;
+	// double	julia_x;
+	// double	julia_y;
+    double  shift_x;
+    double  shift_y;
 }       t_fractal;
 
 // helpful funcs
@@ -96,6 +97,10 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 //void fractal_init(t_fractal *fct);
 void	fractal_init(t_fractal *fractal);
 
+int Key_handler(int keysym, t_fractal  *fct);
+int close_handler(t_fractal *fct);
+
+
 void	fractal_render(t_fractal *fractal);
 //void    handle_pixel(int x, int y, t_fractal *fct);
 static void	handle_pixel(int x, int y, t_fractal *fractal);
@@ -103,4 +108,5 @@ static void	handle_pixel(int x, int y, t_fractal *fractal);
 double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
 t_complex   sum_complex(t_complex z1, t_complex z2);
 t_complex   square_complex(t_complex z);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 10:57:26 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/28 18:24:57 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:00:45 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void    handle_pixel(int x, int y, t_fractal *fct)
     z.x = 0.0;
     z.y = 0.0;
 
-    c.x = map(x, -2, +2, 0, WIDTH);
-    c.y = map(y, +2, -2, 0, HEIGHT);
+    c.x = map(x, -2, +2, 0, WIDTH) + fct->shift_x;
+    c.y = map(y, +2, -2, 0, HEIGHT) + fct->shift_y;
     
     while (i < fct->iteration)
     {

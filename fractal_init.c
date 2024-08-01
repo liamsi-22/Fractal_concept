@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:04 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/29 15:10:41 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/07/29 17:12:14 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,18 @@ static  void malloc_error(void)
 static void	data_init(t_fractal *fractal)
 {
 	fractal->escape_value = 4; // 2 ^ 2, my hypotenuse
-	fractal->iteration = 22342;
-	// fractal->shift_x = 0.0;
-	// fractal->shift_y = 0.0;
+	fractal->iteration = 500;
+	fractal->shift_x = 0;
+    fractal->shift_y = 0;
 	// // zoom factor
 	// fractal->zoom = 1.0;
+}
+
+static void event_fnc(t_fractal  *fct)
+{
+    mlx_hook(fct->mlx_wind, KeyPress, KeyPressMask, Key_handler, fct);
+    // mlx_hook(fct->mlx_wind, ButtonPress, ButtonPressMask, mouse_handler, fct);
+    mlx_hook(fct->mlx_wind, DestroyNotify, StructureNotifyMask, close_handler, fct);
 }
 
 void fractal_init(t_fractal *fct)
@@ -51,4 +58,5 @@ void fractal_init(t_fractal *fct)
     fct->img.pixels_ptr = mlx_get_data_addr(fct->img.img_ptr, &fct->img.bpp, &fct->img.line_len, &fct->img.endian);
     
     data_init(fct);
+    event_fnc(fct);
 }
