@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 10:57:26 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/29 17:00:45 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:55:10 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 
 
 
-void    handle_pixel(int x, int y, t_fractal *fct)
+static  void    handle_pixel(int x, int y, t_fractal *fct)
 {
     t_complex   z;
     t_complex   c;
+    t_complex   tmp;
     int         i;
     int         color;
 
@@ -34,18 +35,18 @@ void    handle_pixel(int x, int y, t_fractal *fct)
     z.x = 0;
     z.y = 0;
 
-    c.x = (map(x, -2, +2, 0, WIDTH) * fct->zoom) + fct->shift_x;
-    c.y = (map(y, +2, -2, 0, HEIGHT) * fct->zoom) + fct->shift_y;
+    c.x = (map(x, -2, +2, WIDTH) * fct->zoom) + fct->shift_x;
+    c.y = (map(y, +2, -2, HEIGHT) * fct->zoom) + fct->shift_y;
     
     while (i < fct->iteration)
     {
-        //z = sum_complex(square_complex(z), c);
-        z.x = (z.x * z.x) - (z.y * z.y) + c.x;
-        z.y = (2 * z.x * z.y) + c.y;
+        tmp.x = (z.x * z.x) - (z.y * z.y) + c.x;
+        tmp.y = (2 * z.x * z.y) + c.y;
+        z = tmp;
         // is the value escaped
         if ((z.x * z.x) + (z.y *z.y) > fct->escape_value)
         {
-            color = map(i, BLACK, WHITE, 0, fct->iteration);
+            color = map(i, BLACK, WHITE, fct->iteration);
             my_pixel_put(x, y, &fct->img, color);
             return ;
         }

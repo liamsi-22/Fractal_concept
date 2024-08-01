@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:04 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/29 17:12:14 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/01 21:02:35 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ static  void malloc_error(void)
     exit(EXIT_FAILURE);
 }
 
-static void	data_init(t_fractal *fractal)
+static void	data_init(t_fractal *fct)
 {
-	fractal->escape_value = 4; // 2 ^ 2, my hypotenuse
-	fractal->iteration = 500;
-	fractal->shift_x = 0;
-    fractal->shift_y = 0;
+	fct->escape_value = 4; // 2 ^ 2, my hypotenuse
+	fct->iteration = 42;
+	fct->shift_x = 0;
+    fct->shift_y = 0;
 	//zoom factor
-	fractal->zoom = 1.0;
+	fct->zoom = 1.0;
 }
 
 static void event_fnc(t_fractal  *fct)

@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:08:22 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/07/29 17:12:05 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/01 20:59:02 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,22 +94,21 @@ typedef struct  s_fractal
 }       t_fractal;
 
 // helpful funcs
-
 void	putstr_fd(char *s, int fd);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-//void fractal_init(t_fractal *fct);
-void	fractal_init(t_fractal *fractal);
+static  void malloc_error(void);
 
+// main fnc
+void    fractal_init(t_fractal *fct);
+void    fractal_render(t_fractal *fractal);
+
+// key handler fnc
 int Key_handler(int keysym, t_fractal  *fct);
+int	mouse_handler(int button, int x, int y, t_fractal *fct);
 int close_handler(t_fractal *fct);
 
+// map scale func
+double map(double unscaled_num, double new_min, double new_max, double old_max);
 
-void	fractal_render(t_fractal *fractal);
-//void    handle_pixel(int x, int y, t_fractal *fct);
-static void	handle_pixel(int x, int y, t_fractal *fractal);
-
-double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-// t_complex   sum_complex(t_complex z1, t_complex z2);
-// t_complex   square_complex(t_complex z);
 
 #endif
