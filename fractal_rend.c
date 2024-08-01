@@ -30,16 +30,18 @@ void    handle_pixel(int x, int y, t_fractal *fct)
     int         color;
 
     i = 0;
-    z.x = 0.0;
-    z.y = 0.0;
 
-    c.x = map(x, -2, +2, 0, WIDTH) + fct->shift_x;
-    c.y = map(y, +2, -2, 0, HEIGHT) + fct->shift_y;
+    z.x = 0;
+    z.y = 0;
+
+    c.x = (map(x, -2, +2, 0, WIDTH) * fct->zoom) + fct->shift_x;
+    c.y = (map(y, +2, -2, 0, HEIGHT) * fct->zoom) + fct->shift_y;
     
     while (i < fct->iteration)
     {
-        z = sum_complex(square_complex(z), c);
-        
+        //z = sum_complex(square_complex(z), c);
+        z.x = (z.x * z.x) - (z.y * z.y) + c.x;
+        z.y = (2 * z.x * z.y) + c.y;
         // is the value escaped
         if ((z.x * z.x) + (z.y *z.y) > fct->escape_value)
         {

@@ -24,14 +24,14 @@ static void	data_init(t_fractal *fractal)
 	fractal->iteration = 500;
 	fractal->shift_x = 0;
     fractal->shift_y = 0;
-	// // zoom factor
-	// fractal->zoom = 1.0;
+	//zoom factor
+	fractal->zoom = 1.0;
 }
 
 static void event_fnc(t_fractal  *fct)
 {
     mlx_hook(fct->mlx_wind, KeyPress, KeyPressMask, Key_handler, fct);
-    // mlx_hook(fct->mlx_wind, ButtonPress, ButtonPressMask, mouse_handler, fct);
+    mlx_hook(fct->mlx_wind, ButtonPress, ButtonPressMask, mouse_handler, fct);
     mlx_hook(fct->mlx_wind, DestroyNotify, StructureNotifyMask, close_handler, fct);
 }
 

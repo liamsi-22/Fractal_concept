@@ -53,7 +53,9 @@
 
 typedef struct s_complex
 {
+    // real
     double  x;
+    // imaginary
     double  y;
 }       t_complex;
 
@@ -88,6 +90,7 @@ typedef struct  s_fractal
 	// double	julia_y;
     double  shift_x;
     double  shift_y;
+    double  zoom;
 }       t_fractal;
 
 // helpful funcs
@@ -106,7 +109,7 @@ void	fractal_render(t_fractal *fractal);
 static void	handle_pixel(int x, int y, t_fractal *fractal);
 
 double map(double unscaled_num, double new_min, double new_max, double old_min, double old_max);
-t_complex   sum_complex(t_complex z1, t_complex z2);
-t_complex   square_complex(t_complex z);
+// t_complex   sum_complex(t_complex z1, t_complex z2);
+// t_complex   square_complex(t_complex z);
 
 #endif
