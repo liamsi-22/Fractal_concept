@@ -43,5 +43,5 @@ int Key_handler(int keysym, t_fractal  *fct)
 
 int	mouse_handler(int button, int x, int y, t_fractal *fractal)
 {
-    printf("%d\n",button);
+    printf("\n%d\n",button);
 }
