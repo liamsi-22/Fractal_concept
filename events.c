@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 15:31:08 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/01 21:04:08 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/02 20:47:57 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ int Key_handler(int keysym, t_fractal  *fct)
 
 int	mouse_handler(int button, int x, int y, t_fractal *fct)
 {
-    	if (button == Button4)
+    (void)x;
+    (void)y;
+    if (button == Button4)
             fct->zoom *= 0.95;
 	else if (button == Button5)
         fct->zoom *= 1.05;
