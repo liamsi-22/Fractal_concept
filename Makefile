@@ -1,6 +1,6 @@
 NAME = fractol
 
-SRC_FILES = main.c fractal_init.c fractal_rend.c events.c guid_fnc.c math_fnc.c
+SRC_FILES = main.c fractal_init.c fractal_rend.c events.c guid_fnc.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 CC = cc

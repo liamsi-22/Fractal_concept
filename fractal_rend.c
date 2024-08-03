@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 10:57:26 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/01 20:55:10 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/03 17:40:52 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,53 +20,62 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	*(unsigned int *)(img->pixels_ptr + offset) = color;
 }
 
-
-
-static  void    handle_pixel(int x, int y, t_fractal *fct)
+static	void	choose_fractal(t_complex *z, t_complex	*c, t_fractal	*fct)
 {
-    t_complex   z;
-    t_complex   c;
-    t_complex   tmp;
-    int         i;
-    int         color;
+	if (!ft_strncmp(fct->name, "julia", 5))
+	{
+		c->x = fct->julia_x;
+		c->y = fct->julia_y;
+	}
+	else
+	{
+		c->x = z->x;
+		c->y = z->y;
+		z->x = 0;
+		z->y = 0;
+	}
+}
 
-    i = 0;
+static	void	handle_pixel(int x, int y, t_fractal *fct)
+{
+	t_complex	z;
+	t_complex	c;
+	t_complex	tmp;
+	int			i;
+	int			color;
 
-    z.x = 0;
-    z.y = 0;
-
-    c.x = (map(x, -2, +2, WIDTH) * fct->zoom) + fct->shift_x;
-    c.y = (map(y, +2, -2, HEIGHT) * fct->zoom) + fct->shift_y;
-    
-    while (i < fct->iteration)
-    {
-        tmp.x = (z.x * z.x) - (z.y * z.y) + c.x;
-        tmp.y = (2 * z.x * z.y) + c.y;
-        z = tmp;
-        // is the value escaped
-        if ((z.x * z.x) + (z.y *z.y) > fct->escape_value)
-        {
-            color = map(i, BLACK, WHITE, fct->iteration);
-            my_pixel_put(x, y, &fct->img, color);
-            return ;
-        }
-        i++;
-    }
-    my_pixel_put(x, y, &fct->img, WHITE);
+	i = 0;
+	z.x = (map(x, -2, +2, WIDTH) * fct->zoom) + fct->shift_x;
+	z.y = (map(y, +2, -2, HEIGHT) * fct->zoom) + fct->shift_y;
+	choose_fractal(&z, &c, fct);
+	while (++i < fct->iteration)
+	{
+		tmp.x = (z.x * z.x) - (z.y * z.y) + c.x;
+		tmp.y = (2 * z.x * z.y) + c.y;
+		z = tmp;
+		if ((z.x * z.x) + (z.y * z.y) > fct->escape_value)
+		{
+			color = map(i, BLACK, WHITE, fct->iteration);
+			my_pixel_put(x, y, &fct->img, color);
+			return ;
+		}
+		i++;
+	}
+	my_pixel_put(x, y, &fct->img, WHITE);
 }
 
 void	fractal_render(t_fractal *fractal)
 {
-    int x;
-    int y;
-    
-    y = -1;
-    while (++y < HEIGHT)
-    {
-        x = -1;
-        while (++x < WIDTH)
-            handle_pixel(x, y, fractal);
-    }
-    mlx_put_image_to_window(fractal->mlx_cnx, fractal->mlx_wind, fractal->img.img_ptr, 0, 0);
-}
+	int	x;
+	int	y;
 
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+			handle_pixel(x, y, fractal);
+	}
+	mlx_put_image_to_window(fractal->mlx_cnx, fractal->mlx_wind,
+		fractal->img.img_ptr, 0, 0);
+}
