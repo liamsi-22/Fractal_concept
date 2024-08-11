@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:07:58 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/03 17:37:20 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:06:14 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ int	main(int ac, char **av)
 {
 	t_fractal	fract;
 
-	if ((ac == 2 && !ft_strncmp(av[1], "mandelbrot", 10)) || \
-	(4 == ac && !ft_strncmp(av[1], "julia", 5)))
+	if ((ac == 2 && !ft_strcmp(av[1], "mandelbrot")) || \
+	(4 == ac && !ft_strcmp(av[1], "julia")))
 	{
 		fract.name = av[1];
-		if (!ft_strncmp(fract.name, "julia", 5))
+		if (!ft_strcmp(fract.name, "julia"))
 		{
 			fract.julia_x = atodbl(av[2]);
 			fract.julia_y = atodbl(av[3]);

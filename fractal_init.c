@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:44:04 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/03 19:06:18 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:18:54 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static	void	event_fnc(t_fractal *fct)
 void	fractal_init(t_fractal *fct)
 {
 	fct->mlx_cnx = mlx_init();
-	if (fct == NULL)
+	if (fct->mlx_cnx == NULL)
 		malloc_error();
 	fct->mlx_wind = mlx_new_window(fct->mlx_cnx, WIDTH, HEIGHT, fct->name);
 	if (fct->mlx_wind == NULL)

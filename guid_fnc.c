@@ -6,27 +6,31 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:07:55 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/03 19:15:21 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/07 23:08:53 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+static int	ft_isdigit(char nb)
 {
-	size_t	i;
+	return (nb >= '0' && nb <= '9');
+}
 
-	i = 0;
-	while (i < n && (*s1 == *s2) && *s1 && *s2)
+static void	ft_error(void)
+{
+	write(2, "ERROR: Enter a valid numbers", 28);
+	exit(EXIT_FAILURE);
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	while (*s1 == *s2 && *s1 && *s2)
 	{
 		s1++;
 		s2++;
-		i++;
 	}
-	if (i == n)
-		return (0);
-	else
-		return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }
 
 void	putstr_fd(char *s, int fd)
@@ -49,30 +53,22 @@ double	atodbl(char *s)
 
 	integer_part = 0;
 	fractional_part = 0;
-	sign = +1;
+	sign = 1;
 	pow = 1;
 	while ((*s >= 9 && *s <= 13) || 32 == *s)
 		++s;
-	while ('+' == *s || '-' == *s)
-		if ('-' == *s++)
-			sign = -sign;
-	while (*s != '.' && *s)
+	if (('+' == *s || '-' == *s) && *s++ == '-')
+		sign = -sign;
+	if (!ft_isdigit(*s) && *s != '.')
+		ft_error();
+	while (*s != '.' && ft_isdigit(*s))
 		integer_part = (integer_part * 10) + (*s++ - '0');
-	if ('.' == *s)
+	while (*s == '.')
 		++s;
-	while (*s)
+	while (ft_isdigit(*s))
 	{
 		pow /= 10;
 		fractional_part = (*s++ - '0') * pow + fractional_part;
 	}
 	return ((integer_part + fractional_part) * sign);
-}
-
-double	map(double unscaled_num, double new_min, double new_max, double old_max)
-{
-	double	old_min;
-
-	old_min = 0;
-	return ((new_max - new_min) * (unscaled_num - old_min)
-		/ (old_max - old_min) + new_min);
 }

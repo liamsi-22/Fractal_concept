@@ -6,11 +6,21 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 10:57:26 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/03 17:40:52 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/07 22:49:12 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+double	map(double unscaled_num, double new_min,
+					double new_max, double old_max)
+{
+	double	old_min;
+
+	old_min = 0;
+	return ((new_max - new_min) * (unscaled_num - old_min)
+		/ (old_max - old_min) + new_min);
+}
 
 static void	my_pixel_put(int x, int y, t_img *img, int color)
 {
@@ -22,7 +32,7 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 
 static	void	choose_fractal(t_complex *z, t_complex	*c, t_fractal	*fct)
 {
-	if (!ft_strncmp(fct->name, "julia", 5))
+	if (!ft_strcmp(fct->name, "julia"))
 	{
 		c->x = fct->julia_x;
 		c->y = fct->julia_y;

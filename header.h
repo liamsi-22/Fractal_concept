@@ -6,7 +6,7 @@
 /*   By: iel-fagh <iel-fagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/28 08:08:22 by iel-fagh          #+#    #+#             */
-/*   Updated: 2024/08/03 22:11:22 by iel-fagh         ###   ########.fr       */
+/*   Updated: 2024/08/07 22:48:33 by iel-fagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_fractal
 }		t_fractal;
 
 void	putstr_fd(char *s, int fd);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 double	atodbl(char *s);
 
 void	fractal_init(t_fractal *fct);
